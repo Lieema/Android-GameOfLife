@@ -1,14 +1,10 @@
 package com.example.gameoflife
 
-import android.app.LauncherActivity
-import android.content.Context
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_game.*
 
@@ -41,12 +37,12 @@ class Fragment_Game : Fragment() {
             val list = mutableListOf<DataItem>()
 
             for (j in 0..(height / itemSize - 1))
-                list.add(DataItem(j % 2 == 0))
+                list.add(DataItem(false))
 
             val l: ListView = ListView(context)
             l.x = (i * itemSize).toFloat() * dp
             l.y = 0f
-            l.adapter = ListItemAdaptater(activity, list)
+            l.adapter = ListItemAdapter(activity, list)
 
             fragment_game_list_layout.addView(l, (25f * dp).toInt(), 0)
         }
