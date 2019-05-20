@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.fragment.app.FragmentActivity
 
-class ListItemAdaptater(private val context: FragmentActivity?, private val data: MutableList<DataItem>) : BaseAdapter() {
+class ListItemAdapter(private val context: FragmentActivity?, private val data: MutableList<DataItem>) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         // first let us retrieve the item at the specified position
@@ -16,14 +16,18 @@ class ListItemAdaptater(private val context: FragmentActivity?, private val data
         // now we build a view first step, acquire a LayoutInflater
         val layoutInflater = LayoutInflater.from(context)
 
-        val rowView = layoutInflater.inflate(R.layout.fragment_game_list_item, parent,false)
+        val root =  layoutInflater.inflate(R.layout.fragment_game_list_item, parent,false)
 
-        if (currentItem.isSelected)
-            rowView.setBackgroundColor(Color.GREEN)
-        else
-            rowView.setBackgroundColor(Color.RED)
+        root.setOnClickListener {
+            currentItem.ChangeState()
+            if (currentItem.isSelected)
+                root.setBackgroundColor(Color.BLACK)
+            else
+                root.setBackgroundColor(Color.WHITE)
 
-        return rowView
+        }
+
+        return root
     }
 
     override fun getItem(position: Int): DataItem {
