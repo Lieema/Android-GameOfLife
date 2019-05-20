@@ -19,12 +19,12 @@ class ListItemAdapter(private val context: FragmentActivity?, private val data: 
         val root =  layoutInflater.inflate(R.layout.fragment_game_list_item, parent,false)
 
         root.setOnClickListener {
-            currentItem.ChangeState()
-            if (currentItem.isSelected)
-                root.setBackgroundColor(Color.BLACK)
-            else
-                root.setBackgroundColor(Color.WHITE)
-
+            if (currentItem.ChangeState()) {
+                if (currentItem.isSelected)
+                    root.setBackgroundColor(Color.BLACK)
+                else
+                    root.setBackgroundColor(Color.WHITE)
+            }
         }
 
         return root
