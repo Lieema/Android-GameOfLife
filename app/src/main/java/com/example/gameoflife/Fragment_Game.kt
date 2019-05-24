@@ -137,6 +137,8 @@ class Fragment_Game : Fragment() {
         if (isRunning){
             isRunning = false
             fragment_game_play_button.text = "Play"
+            nbStep = 0
+            fragement_game_text_step.text = nbStep.toString()
         }
         for (j in 0.. (data.size - 1))
         {
