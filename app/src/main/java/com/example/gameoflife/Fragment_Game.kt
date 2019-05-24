@@ -2,6 +2,7 @@ package com.example.gameoflife
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent.ACTION_MOVE
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
@@ -93,12 +94,14 @@ class Fragment_Game : Fragment() {
 
             val list = mutableListOf<DataItem>()
 
-            for (j in 0..(height / itemSize - 1))
+            for (j in 1..(height / itemSize - 1))
                 list.add(DataItem(false))
 
             val l: ListView = ListView(context)
             l.x = (i * itemSize).toFloat() * dp
             l.y = 0f
+            l.isScrollContainer = false
+            l.isVerticalScrollBarEnabled = false
             l.adapter = ListItemAdapter(activity, list)
 
             data.add(l)
