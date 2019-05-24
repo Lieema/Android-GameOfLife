@@ -14,7 +14,7 @@ class Fragment_Game : Fragment() {
     private var data : MutableList<ListView> = mutableListOf()
     private var nbStep : Int = 0
     private var isRunning: Boolean = false
-
+    private val width: Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView =  inflater.inflate(R.layout.fragment_game, game_layout, false)
@@ -28,6 +28,8 @@ class Fragment_Game : Fragment() {
 
         fragment_game_play_button.text = "Play"
         fragment_game_play_button.setOnClickListener{ ButtonCliked() }
+        fragment_game_stop_button.text = "Stop"
+        fragment_game_stop_button.setOnClickListener { Stop() }
         fragement_game_text_step.text = nbStep.toString()
     }
 
@@ -62,6 +64,20 @@ class Fragment_Game : Fragment() {
             Pause()
         else
             Play()
+    }
+
+    fun Stop() {
+        if (isRunning){
+            var nbColumn = data.count()
+            var nbLine = data[0].adapter.count
+
+            for (j in 0..(nbColumn - 1)){
+                for (i in 0..(nbLine - 1)){
+                    val list = mutableListOf<DataItem>()
+
+                }
+            }
+        }
     }
 
     fun fillData()

@@ -37,4 +37,12 @@
             android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
             android:id="@+id/fragment_game_list_layout"/>
+    <Button
+            android:text="Stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fragment_game_stop_button"
+            app:layout_constraintStart_toEndOf="@+id/fragment_game_play_button"
+            android:layout_marginLeft="28dp" android:layout_marginStart="28dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/guideline"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
