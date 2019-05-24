@@ -1,11 +1,13 @@
 package com.example.gameoflife
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent.ACTION_MOVE
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import androidx.core.view.get
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_game.*
@@ -15,7 +17,6 @@ class Fragment_Game : Fragment() {
     private var data : MutableList<ListView> = mutableListOf()
     private var nbStep : Int = 0
     private var isRunning: Boolean = false
-    private val width: Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView =  inflater.inflate(R.layout.fragment_game, game_layout, false)
@@ -51,8 +52,10 @@ class Fragment_Game : Fragment() {
         isRunning = true
         for (i in 0.. (data.size - 1))
         {
-            for (j in 0..(data[i].adapter.count - 1))
+            for (j in 0..(data[i].adapter.count - 1)) {
                 (data[i].adapter.getItem(j) as DataItem).Disable()
+                val list = mutableListOf<DataItem>()
+            }
         }
 
         fragment_game_play_button.text = "Pause"
@@ -69,13 +72,15 @@ class Fragment_Game : Fragment() {
 
     fun Stop() {
         if (isRunning){
-            var nbColumn = data.count()
-            var nbLine = data[0].adapter.count
-
-            for (j in 0..(nbColumn - 1)){
-                for (i in 0..(nbLine - 1)){
-                    val list = mutableListOf<DataItem>()
-
+            isRunning = false
+            fragment_game_play_button.text = "Play"
+            for (j in 0.. (data.size - 1))
+            {
+                for (i in 0..(data[j].adapter.count - 1)) {
+                    val cell = (data[j].adapter.getItem(i) as DataItem)
+                    cell.Enable()
+                    if (cell.isSelected)
+                         data[j][i].callOnClick()
                 }
             }
         }
