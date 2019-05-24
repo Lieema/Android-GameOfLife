@@ -11,6 +11,9 @@ import androidx.core.view.get
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_game.*
+import java.sql.Time
+import java.util.*
+import kotlin.concurrent.schedule
 
 class Fragment_Game : Fragment() {
 
@@ -50,16 +53,76 @@ class Fragment_Game : Fragment() {
     fun Play()
     {
         isRunning = true
+
         for (i in 0.. (data.size - 1))
         {
             for (j in 0..(data[i].adapter.count - 1)) {
                 (data[i].adapter.getItem(j) as DataItem).Disable()
+            }
+        }
+        UpdateCells()
+        fragment_game_play_button.text = "Pause"
+        ++nbStep
+        fragement_game_text_step.text = nbStep.toString()
+    }
+
+    fun UpdateCells(){
+        //board loads the value for next step
+        val board = Array(data.size,
+            init = {Array<Boolean>(data[0].adapter.count,
+                init = {false})})
+
+        //compute next values in board
+        for (j in 0.. (data.size - 1))
+        {
+            for (i in 0..(data[j].adapter.count - 1)) {
+                var cell = (data[j].adapter.getItem(i) as DataItem)
                 val list = mutableListOf<DataItem>()
+
+                //add neighbours
+                //left
+                if (i > 0)
+                    list.add(data[j].adapter.getItem(i - 1) as DataItem)
+                //right
+                if (i < data[0].adapter.count - 1)
+                    list.add(data[j].adapter.getItem(i + 1) as DataItem)
+                //up
+                if (j > 0)
+                    list.add(data[j - 1].adapter.getItem(i) as DataItem)
+                //down
+                if (j < data.size - 1)
+                    list.add(data[j + 1].adapter.getItem(i) as DataItem)
+                //up-left
+                if (i > 0 && j > 0)
+                    list.add(data[j - 1].adapter.getItem(i - 1) as DataItem)
+                //up-right
+                if (i < data[0].adapter.count - 1 && j > 0)
+                    list.add(data[j - 1].adapter.getItem(i + 1) as DataItem)
+                //down-left
+                if (i > 0 && j < data.size - 1)
+                    list.add(data[j + 1].adapter.getItem(i - 1) as DataItem)
+                //down-right
+                if (i < data[0].adapter.count - 1 && j < data.size - 1)
+                    list.add(data[j + 1].adapter.getItem(i + 1) as DataItem)
+
+                val gol: AsyncGameOfLife = AsyncGameOfLife()
+                var gogol = gol.execute(AsyncParams(list, cell)).get()
+                board[j][i] = gogol?.isSelected ?: cell.isSelected
             }
         }
 
-        fragment_game_play_button.text = "Pause"
-
+        //copy values in data
+        for (j in 0.. (data.size - 1))
+        {
+            for (i in 0..(data[j].adapter.count - 1)) {
+                var cell = (data[j].adapter.getItem(i) as DataItem)
+                if (cell.isSelected != board[j][i]) {
+                    cell.Enable()
+                    data[j][i].callOnClick()
+                    cell.Disable()
+                }
+            }
+        }
     }
 
     fun ButtonCliked()
@@ -74,14 +137,14 @@ class Fragment_Game : Fragment() {
         if (isRunning){
             isRunning = false
             fragment_game_play_button.text = "Play"
-            for (j in 0.. (data.size - 1))
-            {
-                for (i in 0..(data[j].adapter.count - 1)) {
-                    val cell = (data[j].adapter.getItem(i) as DataItem)
-                    cell.Enable()
-                    if (cell.isSelected)
-                         data[j][i].callOnClick()
-                }
+        }
+        for (j in 0.. (data.size - 1))
+        {
+            for (i in 0..(data[j].adapter.count - 1)) {
+                val cell = (data[j].adapter.getItem(i) as DataItem)
+                cell.Enable()
+                if (cell.isSelected)
+                    data[j][i].callOnClick()
             }
         }
     }

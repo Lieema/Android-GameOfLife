@@ -29,8 +29,7 @@ class AsyncGameOfLife : AsyncTask<AsyncParams, Int, DataItem?>() {
 
     //update one cell, depending of its neighbours
     private fun updateCell(listNeighbours: MutableList<DataItem>, cell: DataItem) : DataItem {
-        val isLiving : Boolean = isLiving(listNeighbours) ?: return cell
-        cell.isSelected = isLiving
-        return cell
+        val isLiving : Boolean = isLiving(listNeighbours) ?: return DataItem(cell.isSelected)
+        return DataItem(isLiving)
     }
 }
