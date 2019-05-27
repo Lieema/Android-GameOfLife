@@ -17,9 +17,9 @@ import kotlin.concurrent.schedule
 
 class Fragment_Game : Fragment() {
 
-    private var data : MutableList<ListView> = mutableListOf()
-    private var nbStep : Int = 0
-    private var isRunning: Boolean = false
+    var data : MutableList<ListView> = mutableListOf()
+    var nbStep : Int = 0
+    var isRunning: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView =  inflater.inflate(R.layout.fragment_game, game_layout, false)
@@ -105,7 +105,7 @@ class Fragment_Game : Fragment() {
                 if (i < data[0].adapter.count - 1 && j < data.size - 1)
                     list.add(data[j + 1].adapter.getItem(i + 1) as DataItem)
 
-                val gol: AsyncGameOfLife = AsyncGameOfLife()
+                val gol: AsyncGameOfLife = AsyncGameOfLife(this)
                 var gogol = gol.execute(AsyncParams(list, cell)).get()
                 board[j][i] = gogol?.isSelected ?: cell.isSelected
             }

@@ -2,10 +2,10 @@ package com.example.gameoflife
 
 import android.os.AsyncTask
 
-class AsyncGameOfLife : AsyncTask<AsyncParams, Int, DataItem?>() {
+class AsyncGameOfLife(var frag: Fragment_Game) : AsyncTask<AsyncParams, Int, DataItem?>() {
 
     //only one argument in params
-    override fun doInBackground(vararg params: AsyncParams): DataItem? {
+       override fun doInBackground(vararg params: AsyncParams): DataItem? {
         if (params.size != 1)
             return null
         return updateCell(params[0].listNeighbours, params[0].cell)
