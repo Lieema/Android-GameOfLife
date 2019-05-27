@@ -4,6 +4,11 @@ import android.os.AsyncTask
 import androidx.core.view.get
 
 class AsyncGameOfLife(private var frag: GameFragment) : AsyncTask<Void, Void, Void>() {
+    companion object {
+        private const val aliveCount = 3
+        private const val nothingCount = 2
+    }
+
 
     //only one argument in params
        override fun doInBackground(vararg params: Void?): Void? {
@@ -81,9 +86,9 @@ class AsyncGameOfLife(private var frag: GameFragment) : AsyncTask<Void, Void, Vo
                 ++countLiving
         }
 
-        if (countLiving == 3)
+        if (countLiving == aliveCount)
             return true
-        if (countLiving == 2)
+        if (countLiving == nothingCount)
             return null
         return false
 

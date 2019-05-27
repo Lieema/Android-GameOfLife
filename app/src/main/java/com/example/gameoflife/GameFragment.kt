@@ -78,11 +78,11 @@ class GameFragment : Fragment() {
     }
 
     private fun stop() {
+        nbStep = 0
+        fragement_game_text_step.text = nbStep.toString()
         if (isRunning) {
             isRunning = false
             fragment_game_play_button.text = getString(R.string.Play)
-            nbStep = 0
-            fragement_game_text_step.text = nbStep.toString()
         }
         for (j in 0 until data.size) {
             for (i in 0 until data[j].adapter.count) {
