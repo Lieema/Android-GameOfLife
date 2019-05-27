@@ -1,7 +1,6 @@
 package com.example.gameoflife
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,7 @@ class ListItemAdapter(private val context: FragmentActivity?, private val data: 
         val root =  layoutInflater.inflate(R.layout.fragment_game_list_item, parent,false)
 
         root.setOnClickListener {
-            if (currentItem.ChangeState()) {
+            if (currentItem.changeState()) {
                 if (currentItem.isSelected)
                     root.setBackgroundColor(Color.BLACK)
                 else

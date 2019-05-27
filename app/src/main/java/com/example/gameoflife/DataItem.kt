@@ -3,7 +3,7 @@ package com.example.gameoflife
 class DataItem(var isSelected: Boolean) {
     private var isEnable = true
 
-    fun ChangeState(): Boolean
+    fun changeState(): Boolean
     {
         if (isEnable) {
             isSelected = !isSelected
@@ -12,12 +12,12 @@ class DataItem(var isSelected: Boolean) {
         return false
     }
 
-    fun Enable()
+    fun enable()
     {
         isEnable = true
     }
 
-    fun Disable()
+    fun disable()
     {
         isEnable = false
     }

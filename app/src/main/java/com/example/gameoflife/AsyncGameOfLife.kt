@@ -1,10 +1,9 @@
 package com.example.gameoflife
 
 import android.os.AsyncTask
-import android.util.Log
 import androidx.core.view.get
 
-class AsyncGameOfLife(private var frag: Fragment_Game) : AsyncTask<Void, Void, Void>() {
+class AsyncGameOfLife(private var frag: GameFragment) : AsyncTask<Void, Void, Void>() {
 
     //only one argument in params
        override fun doInBackground(vararg params: Void?): Void? {
@@ -65,9 +64,9 @@ class AsyncGameOfLife(private var frag: Fragment_Game) : AsyncTask<Void, Void, V
                 for (i in 0 until frag.data[j].adapter.count) {
                     val cell = (frag.data[j].adapter.getItem(i) as DataItem)
                     if (cell.isSelected != board[j][i]) {
-                        cell.Enable()
+                        cell.enable()
                         frag.data[j][i].callOnClick()
-                        cell.Disable()
+                        cell.disable()
                     }
                 }
             }
