@@ -1,18 +1,81 @@
 package com.example.gameoflife
 
 import android.os.AsyncTask
+import android.util.Log
+import androidx.core.view.get
 
-class AsyncGameOfLife(var frag: Fragment_Game) : AsyncTask<AsyncParams, Int, DataItem?>() {
+class AsyncGameOfLife(private var frag: Fragment_Game) : AsyncTask<Void, Void, Void>() {
 
     //only one argument in params
-       override fun doInBackground(vararg params: AsyncParams): DataItem? {
-        if (params.size != 1)
-            return null
-        return updateCell(params[0].listNeighbours, params[0].cell)
+       override fun doInBackground(vararg params: Void?): Void? {
+        while (frag.isRunning) {
+            Thread.sleep(1000)
+            publishProgress()
+        }
+        return null
+    }
+
+    override fun onProgressUpdate(vararg values: Void?) {
+        frag.addStep()
+        //board loads the value for next step
+        val board = Array(frag.data.size,
+            init = {Array(frag.data[0].adapter.count,
+                init = {false})})
+
+        //compute next values in board
+        for (j in 0 until frag.data.size)
+        {
+            for (i in 0 until frag.data[j].adapter.count) {
+                val cell = (frag.data[j].adapter.getItem(i) as DataItem)
+                val list = mutableListOf<DataItem>()
+
+                //add neighbours
+                //left
+                if (i > 0)
+                    list.add(frag.data[j].adapter.getItem(i - 1) as DataItem)
+                //right
+                if (i < frag.data[0].adapter.count - 1)
+                    list.add(frag.data[j].adapter.getItem(i + 1) as DataItem)
+                //up
+                if (j > 0)
+                    list.add(frag.data[j - 1].adapter.getItem(i) as DataItem)
+                //down
+                if (j < frag.data.size - 1)
+                    list.add(frag.data[j + 1].adapter.getItem(i) as DataItem)
+                //up-left
+                if (i > 0 && j > 0)
+                    list.add(frag.data[j - 1].adapter.getItem(i - 1) as DataItem)
+                //up-right
+                if (i < frag.data[0].adapter.count - 1 && j > 0)
+                    list.add(frag.data[j - 1].adapter.getItem(i + 1) as DataItem)
+                //down-left
+                if (i > 0 && j < frag.data.size - 1)
+                    list.add(frag.data[j + 1].adapter.getItem(i - 1) as DataItem)
+                //down-right
+                if (i < frag.data[0].adapter.count - 1 && j < frag.data.size - 1)
+                    list.add(frag.data[j + 1].adapter.getItem(i + 1) as DataItem)
+
+                board[j][i] = updateCell(list, cell).isSelected
+            }
+        }
+
+        if (frag.isRunning) {
+            //copy values in data
+            for (j in 0 until frag.data.size) {
+                for (i in 0 until frag.data[j].adapter.count) {
+                    val cell = (frag.data[j].adapter.getItem(i) as DataItem)
+                    if (cell.isSelected != board[j][i]) {
+                        cell.Enable()
+                        frag.data[j][i].callOnClick()
+                        cell.Disable()
+                    }
+                }
+            }
+        }
     }
 
     private fun isLiving(listCell: MutableList<DataItem>) : Boolean? {
-        var countLiving : Int = 0
+        var countLiving = 0
 
         for (cell in listCell) {
             if (cell.isSelected)

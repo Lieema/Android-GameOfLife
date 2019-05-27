@@ -1,19 +1,13 @@
 package com.example.gameoflife
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent.ACTION_MOVE
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import androidx.core.view.get
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_game.*
-import java.sql.Time
-import java.util.*
-import kotlin.concurrent.schedule
 
 class Fragment_Game : Fragment() {
 
@@ -38,12 +32,17 @@ class Fragment_Game : Fragment() {
         fragement_game_text_step.text = nbStep.toString()
     }
 
+    fun addStep() {
+        ++nbStep
+        fragement_game_text_step.text = nbStep.toString()
+    }
+
     fun Pause()
     {
         isRunning = false
-        for (i in 0.. (data.size - 1))
+        for (i in 0 until data.size)
         {
-            for (j in 0..(data[i].adapter.count - 1))
+            for (j in 0 until data[i].adapter.count)
                 (data[i].adapter.getItem(j) as DataItem).Enable()
         }
 
@@ -54,75 +53,17 @@ class Fragment_Game : Fragment() {
     {
         isRunning = true
 
-        for (i in 0.. (data.size - 1))
+        for (i in 0 until data.size)
         {
-            for (j in 0..(data[i].adapter.count - 1)) {
+            for (j in 0 until data[i].adapter.count) {
                 (data[i].adapter.getItem(j) as DataItem).Disable()
             }
         }
-        UpdateCells()
+
+        val gameTask = AsyncGameOfLife(this)
+        gameTask.execute()
+
         fragment_game_play_button.text = "Pause"
-        ++nbStep
-        fragement_game_text_step.text = nbStep.toString()
-    }
-
-    fun UpdateCells(){
-        //board loads the value for next step
-        val board = Array(data.size,
-            init = {Array<Boolean>(data[0].adapter.count,
-                init = {false})})
-
-        //compute next values in board
-        for (j in 0.. (data.size - 1))
-        {
-            for (i in 0..(data[j].adapter.count - 1)) {
-                var cell = (data[j].adapter.getItem(i) as DataItem)
-                val list = mutableListOf<DataItem>()
-
-                //add neighbours
-                //left
-                if (i > 0)
-                    list.add(data[j].adapter.getItem(i - 1) as DataItem)
-                //right
-                if (i < data[0].adapter.count - 1)
-                    list.add(data[j].adapter.getItem(i + 1) as DataItem)
-                //up
-                if (j > 0)
-                    list.add(data[j - 1].adapter.getItem(i) as DataItem)
-                //down
-                if (j < data.size - 1)
-                    list.add(data[j + 1].adapter.getItem(i) as DataItem)
-                //up-left
-                if (i > 0 && j > 0)
-                    list.add(data[j - 1].adapter.getItem(i - 1) as DataItem)
-                //up-right
-                if (i < data[0].adapter.count - 1 && j > 0)
-                    list.add(data[j - 1].adapter.getItem(i + 1) as DataItem)
-                //down-left
-                if (i > 0 && j < data.size - 1)
-                    list.add(data[j + 1].adapter.getItem(i - 1) as DataItem)
-                //down-right
-                if (i < data[0].adapter.count - 1 && j < data.size - 1)
-                    list.add(data[j + 1].adapter.getItem(i + 1) as DataItem)
-
-                val gol: AsyncGameOfLife = AsyncGameOfLife(this)
-                var gogol = gol.execute(AsyncParams(list, cell)).get()
-                board[j][i] = gogol?.isSelected ?: cell.isSelected
-            }
-        }
-
-        //copy values in data
-        for (j in 0.. (data.size - 1))
-        {
-            for (i in 0..(data[j].adapter.count - 1)) {
-                var cell = (data[j].adapter.getItem(i) as DataItem)
-                if (cell.isSelected != board[j][i]) {
-                    cell.Enable()
-                    data[j][i].callOnClick()
-                    cell.Disable()
-                }
-            }
-        }
     }
 
     fun ButtonCliked()
@@ -140,9 +81,9 @@ class Fragment_Game : Fragment() {
             nbStep = 0
             fragement_game_text_step.text = nbStep.toString()
         }
-        for (j in 0.. (data.size - 1))
+        for (j in 0 until data.size)
         {
-            for (i in 0..(data[j].adapter.count - 1)) {
+            for (i in 0 until data[j].adapter.count) {
                 val cell = (data[j].adapter.getItem(i) as DataItem)
                 cell.Enable()
                 if (cell.isSelected)
@@ -160,11 +101,11 @@ class Fragment_Game : Fragment() {
 
         val itemSize = 25
 
-        for (i in 0..(width / itemSize - 1)) {
+        for (i in 0 until width / itemSize) {
 
             val list = mutableListOf<DataItem>()
 
-            for (j in 1..(height / itemSize - 1))
+            for (j in 1 until height / itemSize)
                 list.add(DataItem(false))
 
             val l: ListView = ListView(context)
