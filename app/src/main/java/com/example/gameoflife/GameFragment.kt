@@ -13,6 +13,7 @@ class GameFragment : Fragment() {
     // Like static variable in Java
     companion object {
         private const val itemSize = 25
+        private const val timeTick: Long = 800
     }
 
     val data : MutableList<ListView> = mutableListOf()
@@ -72,12 +73,13 @@ class GameFragment : Fragment() {
         val cellManager = CellManager()
         val threadedExecutor = ThreadedExecutor()
         threadedExecutor.execute {
+            Thread.sleep(timeTick)
             while (isRunning) {
-                Thread.sleep(800)
                 cellManager.onProgressUpdate(data, isRunning)
                 activity?.runOnUiThread {
                     this.addStep()
                 }
+                Thread.sleep(timeTick)
             }
         }
     }
