@@ -1,6 +1,7 @@
 package com.example.gameoflife
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,20 +14,27 @@ class GameFragment : Fragment() {
     // Like static variable in Java
     companion object {
         private const val itemSize = 25
+        private const val itemCount = 15 * 20
+        private const val gridWidth = 15
     }
 
     val data : MutableList<ListView> = mutableListOf()
     var isRunning: Boolean = false
+    var dataItems: MutableList<DataItem> = arrayListOf()
 
     private var nbStep : Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        for (j in 1 until itemCount)
+            dataItems.add(DataItem(false))
+        fragment_game_recycler_view.adapter = GameOfLifeRecyclerAdapter(activity, dataItems)
+
         return inflater.inflate(R.layout.fragment_game, game_layout, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.post { fillData() }
 
         fragment_game_play_button.text = getString(R.string.Play)
         fragment_game_play_button.setOnClickListener{ playPauseButtonClicked() }
@@ -84,39 +92,7 @@ class GameFragment : Fragment() {
             isRunning = false
             fragment_game_play_button.text = getString(R.string.Play)
         }
-        for (j in 0 until data.size) {
-            for (i in 0 until data[j].adapter.count) {
-                val cell = (data[j].adapter.getItem(i) as DataItem)
-                cell.enable()
-                if (cell.isSelected)
-                    data[j][i].callOnClick()
-            }
-        }
-    }
-
-    private fun fillData()
-    {
-        val dp = resources.displayMetrics.density
-
-        val width = (fragment_game_list_layout.measuredWidth / dp).toInt()
-        val height = (fragment_game_list_layout.measuredHeight / dp).toInt()
-
-        for (i in 0 until width / itemSize) {
-
-            val dataItems = mutableListOf<DataItem>()
-
-            for (j in 1 until height / itemSize)
-                dataItems.add(DataItem(false))
-
-            val listView = ListView(context)
-            listView.x = (i * itemSize).toFloat() * dp
-            listView.y = 0f
-            listView.isScrollContainer = false
-            listView.isVerticalScrollBarEnabled = false
-            listView.adapter = ListItemAdapter(activity, dataItems)
-
-            data.add(listView)
-            fragment_game_list_layout.addView(listView, (25f * dp).toInt(), 0)
-        }
+        dataItems.forEach { cell -> cell.disable() }
+        fragment_game_recycler_view.adapter?.notifyDataSetChanged()
     }
 }

@@ -91,7 +91,6 @@ class AsyncGameOfLife(private var frag: GameFragment) : AsyncTask<Void, Void, Vo
         if (countLiving == nothingCount)
             return null
         return false
-
     }
 
     //update one cell, depending of its neighbours
