@@ -73,11 +73,11 @@ class GameFragment : Fragment() {
         val threadedExecutor = ThreadedExecutor()
         threadedExecutor.execute {
             while (isRunning) {
+                Thread.sleep(800)
                 cellManager.onProgressUpdate(data, isRunning)
                 activity?.runOnUiThread {
                     this.addStep()
                 }
-                Thread.sleep(800)
             }
         }
     }
