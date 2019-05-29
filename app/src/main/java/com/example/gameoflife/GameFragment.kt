@@ -63,10 +63,23 @@ class GameFragment : Fragment() {
             }
         }
 
-        val gameTask = AsyncGameOfLife(this)
-        gameTask.execute()
+        run()
 
         fragment_game_play_button.text = getString(R.string.Pause)
+    }
+
+    private fun run() {
+        val cellManager = CellManager()
+        val threadedExecutor = ThreadedExecutor()
+        threadedExecutor.execute {
+            while (isRunning) {
+                cellManager.onProgressUpdate(data, isRunning)
+                activity?.runOnUiThread {
+                    this.addStep()
+                }
+                Thread.sleep(800)
+            }
+        }
     }
 
     private fun playPauseButtonClicked()
