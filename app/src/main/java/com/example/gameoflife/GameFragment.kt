@@ -1,5 +1,6 @@
 package com.example.gameoflife
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +30,7 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.post { fillData() }
 
+        fragment_game_play_button.setBackgroundColor(Color.GREEN)
         fragment_game_play_button.text = getString(R.string.Play)
         fragment_game_play_button.setOnClickListener{ playPauseButtonClicked() }
         fragment_game_stop_button.text = getString(R.string.Stop)
@@ -100,10 +102,14 @@ class GameFragment : Fragment() {
 
     private fun playPauseButtonClicked()
     {
-        if (isRunning)
+        if (isRunning) {
             pause()
-        else
+            fragment_game_play_button.setBackgroundColor(Color.GREEN)
+        }
+        else {
             play()
+            fragment_game_play_button.setBackgroundColor(Color.rgb(255,165,0))
+        }
     }
 
     private fun stop() {
@@ -114,6 +120,7 @@ class GameFragment : Fragment() {
             fragment_game_play_button.text = getString(R.string.Play)
         }
         clearCells()
+        fragment_game_play_button.setBackgroundColor(Color.GREEN)
     }
 
     private fun clearCells() {
