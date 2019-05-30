@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:orientation="vertical"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   tools:background="@android:color/holo_orange_dark"
+                                                   android:id="@+id/rules_layout">
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <TextView
+                    android:text="Les règles du jeu de la vie"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="102dp"
+                    android:id="@+id/rules_fragment_textView1"
+                    android:textSize="30sp" android:fontFamily="monospace"
+                    android:textColor="@android:color/background_dark" tools:layout_editor_absoluteY="470dp"
+                    tools:layout_editor_absoluteX="8dp"/>
+            <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="306dp"
+                    android:layout_height="164dp"
+                    android:id="@+id/rules_fragment_textView2"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:text="À chaque étape, l’évolution d’une cellule est entièrement déterminée par l’état de ses huit voisines de la façon suivante :"
+                    android:fontFamily="casual" tools:layout_editor_absoluteY="554dp"
+                    tools:layout_editor_absoluteX="8dp"/>
+            <TextView
+                    android:text="Une cellule morte possédant exactement trois voisines vivantes devient vivante (elle naît).
+        Une cellule vivante possédant deux ou trois voisines vivantes le reste, sinon elle meurt."
+                    android:layout_width="314dp"
+                    android:layout_height="204dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:id="@+id/rules_fragment_textView3"
+                    android:textSize="18sp" android:fontFamily="casual"
+                    android:layout_marginStart="12dp" android:layout_marginLeft="12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp" android:layout_marginBottom="8dp"
+            />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:text="Si une cellule a exactement trois voisines vivantes, elle est vivante à l’étape suivante. C’est le cas de la cellule verte dans la configuration de gauche."
+                        android:layout_width="207dp"
+                        android:layout_height="247dp"
+                        android:gravity="center"
+                        android:id="@+id/rules_fragment_textView"
+                        android:textSize="18sp"
+                        android:fontFamily="casual"
+                        app:layout_constraintStart_toEndOf="@+id/rules_fragment_imageView"
+                        android:layout_marginStart="8dp" android:layout_marginLeft="8dp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
+                        app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.0"/>
+                <ImageView
+                        android:src="@drawable/gol_born"
+                        android:layout_width="82dp"
+                        android:layout_height="82dp"
+                        android:id="@+id/rules_fragment_imageView"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginLeft="36dp" android:layout_marginStart="36dp"
+                        app:layout_constraintVertical_bias="0.494"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <ImageView
+                        android:src="@drawable/gol_born"
+                        android:layout_width="82dp"
+                        android:layout_height="82dp"
+                        android:id="@+id/rules_fragment_imageView1"
+                        app:srcCompat="@drawable/gol_nochange"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="40dp"
+                        android:layout_marginStart="40dp" app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="8dp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.295"/>
+                <TextView
+                        android:text="Si une cellule a exactement deux voisines vivantes, elle reste dans son état actuel à l’étape suivante. Dans le cas de la configuration de gauche, la cellule située entre les deux cellules vivantes reste morte à l’étape suivante."
+                        android:layout_width="209dp"
+                        android:gravity="center"
+                        android:layout_height="318dp"
+                        android:id="@+id/rules_fragment_textView5"
+                        android:textSize="18sp" android:fontFamily="casual"
+                        app:layout_constraintStart_toEndOf="@+id/rules_fragment_imageView1"
+                        android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.0" android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
+                        app:layout_constraintHorizontal_bias="0.0"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_height="match_parent">
+
+                <ImageView
+                        android:src="@drawable/gol_born"
+                        android:layout_width="82dp"
+                        android:layout_height="82dp"
+                        android:id="@+id/rules_fragment_imageView2"
+                        app:srcCompat="@drawable/gol_dead"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="24dp"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="24dp"
+                        android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.487"/>
+                <TextView
+                        android:text=" Si une cellule a strictement moins de deux ou strictement plus de trois voisines vivantes, elle est morte à l’étape suivante. C’est le cas de la cellule rouge dans la configuration de gauche."
+                        android:layout_width="221dp"
+                        android:layout_height="286dp"
+                        android:gravity="center"
+                        android:id="@+id/rules_fragment_textView4"
+                        android:textSize="18sp"
+                        android:fontFamily="casual"
+                        app:layout_constraintStart_toEndOf="@+id/rules_fragment_imageView2"
+                        android:layout_marginStart="8dp" android:layout_marginLeft="8dp"
+                        android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginRight="8dp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintVertical_bias="0.0"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

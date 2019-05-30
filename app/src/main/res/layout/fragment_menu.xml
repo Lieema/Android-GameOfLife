@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:orientation="vertical"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   tools:background="@android:color/holo_orange_dark"
+                                                   android:id="@+id/menu_layout">
+    <Button
+            android:text="@string/Play"
+            android:layout_width="146dp"
+            android:layout_height="93dp"
+            android:id="@+id/menu_fragment_button_play"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            android:background="@android:color/holo_purple" app:layout_constraintHorizontal_bias="0.497"
+            android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/guideline2"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline2"
+            app:layout_constraintGuide_percent="0.5"/>
+    <Button
+            android:text="@string/Info"
+            android:layout_width="146dp"
+            android:layout_height="93dp"
+            android:id="@+id/menu_fragment_button_info"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.497" android:background="@android:color/holo_purple"
+            android:layout_marginTop="32dp" app:layout_constraintTop_toTopOf="@+id/guideline2"/>
+    <TextView
+            android:text="Game Of Life"
+            android:gravity="center"
+            android:layout_width="271dp"
+            android:layout_height="58dp"
+            android:id="@+id/textView" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.496"
+            android:fontFamily="cursive" android:textSize="36sp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
