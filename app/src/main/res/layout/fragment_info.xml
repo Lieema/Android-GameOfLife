@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:orientation="vertical"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   tools:background="@android:color/holo_orange_dark"
+                                                   android:id="@+id/info_layout">
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <TextView
+                    android:text="La jeu de la vie"
+                    android:layout_gravity="center"
+                    android:layout_width="307dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/info_fragment_textView1"
+                    android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp" android:textSize="30sp" android:fontFamily="monospace"
+                    android:textColor="@android:color/background_dark"/>
+            <ImageView
+                    android:src="@drawable/game_of_life"
+                    android:layout_width="326dp"
+                    android:layout_gravity="center"
+                    android:layout_height="209dp"
+                    android:id="@+id/info_fragment_imageView1" android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            />
+            <TextView
+                    android:layout_width="302dp"
+                    android:layout_height="196dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/info_fragment_textView2" android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp" android:textSize="18sp"
+                    android:gravity="center"
+                    android:text="Le jeu de la vie est un automate cellulaire imaginé par John Horton Conway en 1970 et qui est probablement, au début du xxie siècle, le plus connu de tous les automates cellulaires. Le jeu de la vie est un jeu au sens mathématique plutôt que ludique."
+                    android:fontFamily="casual"/>
+            <TextView
+                    android:text="Le « jeu » se déroule sur une grille à deux dimensions, théoriquement infinie (mais de longueur et de largeur finies et plus ou moins grandes dans la pratique), dont les cases — qu’on appelle des « cellules », par analogie avec les cellules vivantes — peuvent prendre deux états distincts : « vivante » ou « morte ». "
+                    android:layout_width="299dp"
+                    android:layout_height="280dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:id="@+id/info_fragment_textView3" android:layout_marginTop="20dp"
+                    android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp" android:textSize="18sp" android:fontFamily="casual"/>
+            <Button
+                    android:text="Les règles ->"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:id="@+id/info_fragment_button" android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp" android:layout_marginRight="16dp"/>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
