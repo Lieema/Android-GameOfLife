@@ -13,7 +13,7 @@
             android:layout_height="wrap_content" android:id="@+id/guideline"
             app:layout_constraintGuide_percent="0.07"/>
     <Button
-            android:text="@string/play_pause"
+            android:text="@string/Play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fragment_game_play_button" android:layout_marginTop="8dp"
@@ -37,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/fragment_game_list_layout"/>
     <Button
-            android:text="@string/stop"
+            android:text="@string/Stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fragment_game_stop_button"
