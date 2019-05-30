@@ -4,5 +4,5 @@ Done by
 
 Axel Vigny
 Maxime Lacombe
-Laxmana Thayalan
+Laxman Thayalan
 Emmanuel Meric
