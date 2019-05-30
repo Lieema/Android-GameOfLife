@@ -34,6 +34,20 @@ class GameFragment : Fragment() {
         fragment_game_stop_button.text = getString(R.string.Stop)
         fragment_game_stop_button.setOnClickListener { stop() }
         fragement_game_text_step.text = nbStep.toString()
+
+        val templateManager = TemplateManager()
+        gliderButton.setOnClickListener{ fillGridWithTemplate(templateManager.getGliderTemplate()) }
+        pulsarButton.setOnClickListener{ fillGridWithTemplate(templateManager.getPulsarTemplate()) }
+    }
+
+    private fun fillGridWithTemplate(template: Template) {
+        clearCells()
+        for (j in 0 until data.size) {
+            for (i in 0 until data[j].adapter.count) {
+                if (template.coordinates.contains(Pair(i, j)))
+                    data[i][j].callOnClick()
+            }
+        }
     }
 
     fun addStep() {
@@ -99,6 +113,10 @@ class GameFragment : Fragment() {
             isRunning = false
             fragment_game_play_button.text = getString(R.string.Play)
         }
+        clearCells()
+    }
+
+    private fun clearCells() {
         for (j in 0 until data.size) {
             for (i in 0 until data[j].adapter.count) {
                 val cell = (data[j].adapter.getItem(i) as DataItem)
