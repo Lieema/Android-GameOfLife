@@ -13,20 +13,20 @@
             android:layout_height="wrap_content" android:id="@+id/guideline"
             app:layout_constraintGuide_percent="0.07"/>
     <Button
-            android:text="Play/Pause"
+            android:text="@string/play_pause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fragment_game_play_button" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="24dp"
-            android:layout_marginStart="24dp"/>
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp" app:layout_constraintVertical_bias="0.4"/>
     <TextView
-            android:text="nbStep"
+            android:text="@string/nbstep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fragement_game_text_step" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/guideline"/>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:orientation="horizontal"
@@ -34,15 +34,31 @@
             android:layout_height="0dp" android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="@+id/guideline" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/fragment_game_list_layout"/>
     <Button
-            android:text="Stop"
+            android:text="@string/stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fragment_game_stop_button"
             app:layout_constraintStart_toEndOf="@+id/fragment_game_play_button"
             android:layout_marginLeft="28dp" android:layout_marginStart="28dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/guideline"/>
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintVertical_bias="0.4"/>
+    <Button
+            android:text="@string/pulsar"
+            android:layout_width="65dp"
+            android:layout_height="29dp"
+            android:id="@+id/pulsarButton" android:textSize="8sp"
+            android:layout_marginTop="24dp" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_game_stop_button" android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"/>
+    <Button
+            android:text="@string/glider"
+            android:layout_width="65dp"
+            android:layout_height="29dp"
+            android:id="@+id/gliderButton" android:textSize="8sp"
+            android:layout_marginTop="4dp" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_game_stop_button" android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
