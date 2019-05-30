@@ -3,4 +3,9 @@
     <string name="Play">Play</string>
     <string name="Stop">Stop</string>
     <string name="Pause">Pause</string>
+    <string name="glider">Glider</string>
+    <string name="pulsar">pulsar</string>
+    <string name="stop">Stop</string>
+    <string name="nbstep">nbStep</string>
+    <string name="play_pause">Play/Pause</string>
 </resources>
